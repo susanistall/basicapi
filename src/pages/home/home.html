@@ -1,14 +1,22 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content>
+  <ion-card inset>
+    <ion-card-header>
+      <h2 *ngIf="passengers">{{passengers?.name}}</h2>
+      <h2 *ngIf="!passengers">!!Hooray!!</h2>
+  	</ion-card-header>
+     <ion-card-content>
+      <p>{{passengers?.address}}</p>
+      <p *ngIf="passengers">Estimated drive time: {{passengers?.duration}} minutes<br>
+      	<span *ngIf="passengers?.type == 'p'">Pickup Window: {{passengers?.time}}</span><br><a href="tel:+{{passengers?.phone}}" class="button button-positive">{{passengers?.phone}}</a></p>
+      <p *ngIf="!passengers">Done for the Day!<br><a href="tel:+{{passengers?.phone}}" class="button button-positive">{{passengers?.phone}}</a></p>
+    </ion-card-content>
+  </ion-card>
+  <button ion-button (click)="nextTrip(passengers)" *ngIf="passengers"> Trip Complete</button>
 </ion-content>
